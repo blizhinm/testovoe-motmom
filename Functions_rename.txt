@@ -1,0 +1,23 @@
+// EventItemsList
+
+addToActive - addActive
+removeFromActive - removeActive
+selectItemsOnTimeClick - selectItems
+
+// EventsPanel
+
+animateForm - startTransition
+
+onEventsTimeChange - eventsTimeChange
+renderChildren - *DELETED*
+onTimeClick - timeSelected
+
+// TimeItemsList 
+
+onEventItemClick - eventClick
+onItemClick - itemClick
+renderTimeElements - renderItems
+
+// TimePanel 
+
+onEventItemClick - eventClick

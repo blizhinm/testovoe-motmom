@@ -1,0 +1,24 @@
+.time-options {
+    text-align: center;
+    border-right: 1px solid #000;
+    flex-basis: 33%;
+
+    &:last-child {
+        border: none;
+    }
+
+    &__title {
+        border-bottom: 1px solid #000;
+        padding: 5px;
+    }
+
+    &__time-slider {
+        display: flex;
+        justify-content: space-around;
+        padding: 5px;
+    }
+
+    input {
+        width: 60%;
+    }
+}

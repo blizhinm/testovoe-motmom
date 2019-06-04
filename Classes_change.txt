@@ -1,0 +1,43 @@
+main-wrapper - page-wrapper
+events-form_container - events-panel
+events-form_container_header - events-panel__header
+events-form_container_wrap - events-panel__content
+events-form_wrapper - events-panel__events-form
+main-ul - events-panel__list - event-items-list
+main-ul_item - events-panel__list-item - event-items-list__item
+events-add_button - events-panel__add-new-button
+
+event-item_checkbox - event-item__checkbox
+event-item_time - event-item__time
+event-item_text - event-item__text
+event-item_delete-btn - event-item__delete-button
+
+add-event-form_container - events-panel__add-event-form
+add-event-form_wrapper - add-event-form
+add-event-form_header - add-event-form__header
+add-event-form - add-event-form__form
+
+add-event-form_input-div - add-event-form__input-div - add-event-form__group
+add-event-form_event-name-input - add-event-form__event-name-input - add-event-form__event-name
+add-event-form_event-time-input - add-event-form__event-time-input - add-event-form__event-time
+add-event-form_buttons - add-event-form__buttons
+add-event-form_cancel-btn - add-event-form__cancel-button - add-event-form__cancel
+
+modify-events-form_wrapper - time-panel
+modify-events-form_header - time-panel__header
+modify-events-form_wrap - time-panel__content
+modify-events-form_header_options - time-panel__options
+modify-events-form - time-panel__list
+modify-events-form_ul_item - time-panel__list-item
+
+modify-events_options_container - time-panel__options-item - time-options
+modify-events_options-info - time-panel__options-info - time-options__title
+
+modify-events_options-info_start-time - options-info__start - DELETED
+modify-events_options-info_end-time - options-info__end - DELETED
+modify-events_options-info_period - options-info__period - DELETED
+
+modify-events_options-input - time-panel__options-input - time-options__time-slider
+modify-events_options_start-time - options-input__start - time-slider__start
+modify-events_options_end-time - options-input__end - time-slider__end
+modify-events_options_period - options-input__period - time-slider__period

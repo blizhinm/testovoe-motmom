@@ -1,0 +1,12 @@
+.time-panel__list {
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-height: 300px;
+        overflow-y: auto;
+        border: 1px solid #000;
+        border-radius: 3px;
+        padding: 5px;
+    }
+}

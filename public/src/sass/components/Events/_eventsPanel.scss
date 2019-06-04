@@ -1,0 +1,54 @@
+.events-panel {
+    border: 1px solid #000;
+	border-radius: 5px;
+	margin-bottom: 30px;
+	overflow-x: hidden;
+    width: 100%;
+
+    &__header {
+        border-bottom: 1px solid #000;
+        padding: 7px;
+        text-align: center;
+        font-weight: 900;
+    }
+    
+    &__content {
+        width: 200%;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    &__events-form {
+        display: inline-block;
+        flex-basis: 50%;
+        text-align: center;
+        position: relative;
+    }
+
+    &__add-new-button {
+        appearance: none;
+        padding: 5px 10px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        background: none;
+        width: 50%;
+        margin: 10px auto 20px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    &__add-event-form {
+        display: inline-block;
+        padding: 20px 0;
+        flex-basis: 50%;
+        position: relative;
+    }
+}
+
+@media (min-width: $breakpoint-tablet) {
+	.events-panel {
+		flex-basis: 47%;
+		margin-bottom: 0;
+	}
+}

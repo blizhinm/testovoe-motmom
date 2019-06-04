@@ -1,0 +1,18 @@
+.time-panel__list-item {
+    border: 1px solid #000;
+    margin: 5px;
+    padding: 3px;
+    text-align: center;
+    flex-basis: 10%;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &.active {
+        background: #aaa;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        border-color: transparent;
+    }
+}

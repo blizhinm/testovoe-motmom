@@ -1,0 +1,34 @@
+<div class="time-options">
+    <div class="time-options__title">
+        <span>Начало:</span>
+        <span class="time-options__title-value_start">{{start}}:00</span>
+    </div>
+    <div class="time-options__time-slider time-slider">
+        <label for="time-slider__start">0</label>
+        <input type="range" id="time-slider__start" min="0" max="11" value={{start}} step="1">
+        <label for="time-slider__start">11</label>
+    </div>
+</div>
+<div class="time-options">
+    <div class="time-options__title">
+        <span>Конец:</span>
+        <span class="time-options__title-value_end">{{end}}:00</span>
+    </div>
+    <div class="time-options__time-slider time-slider">
+        <label for="time-slider__end">12</label>
+        <input type="range" id="time-slider__end" min="12" max="24" value={{end}} step="1">
+        <label for="time-slider__end">24</label>
+    </div>
+</div>
+<div class="time-options">
+    <div class="time-options__title">
+        <span>Период:</span>
+        <span class="time-options__title-value_period">{{period}}</span>
+        <span>мин.</span>
+    </div>
+    <div class="time-options__time-slider time-slider">
+        <label for="time-slider__period">5</label>
+        <input type="range" id="time-slider__period" min="5" max="55" value="{{period}}" step="5">
+        <label for="time-slider__period">55</label>
+    </div>
+</div>

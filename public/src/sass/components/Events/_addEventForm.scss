@@ -1,0 +1,61 @@
+.add-event-form-wrapper {
+  width: 75%;
+  margin: 0 auto;
+
+  .add-event-form {
+    border: 1px solid #000;
+    border-radius: 3px;
+
+    &__header {
+      text-align: center;
+      border-bottom: 1px solid #000;
+      margin-bottom: 20px;
+      padding: 5px 0;
+      font-weight: 900;
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      width: 75%;
+      margin: auto;
+    }
+
+    &__group {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      input {
+        width: 45%;
+        border: 1px solid #555;
+        padding: 3px;
+        border-radius: 3px;
+      }
+      label {
+        text-align: right;
+        flex-basis: 45%;
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      margin-top: 10px;
+      justify-content: space-around;
+      border-top: 1px solid #000;
+
+      button, input {
+        flex-basis: 25%;
+        appearance: none;
+        padding: 3px 5px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        background: none;
+        cursor: pointer;
+        outline: none;
+        margin-top: 10px;
+      }
+    }
+  }
+}

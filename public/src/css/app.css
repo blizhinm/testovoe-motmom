@@ -1,0 +1,310 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v4.0 | 20180602
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+  display: block;
+}
+
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+  display: none;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+  font-size: 15px;
+}
+
+.page-wrapper {
+  padding: 20px 5%;
+}
+
+@media (min-width: 975px) {
+  .page-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+@media (min-width: 600px) and (max-width: 974px) {
+  .page-wrapper {
+    padding: 20px 15%;
+  }
+}
+.events-panel {
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  overflow-x: hidden;
+  width: 100%;
+}
+.events-panel__header {
+  border-bottom: 1px solid #000;
+  padding: 7px;
+  text-align: center;
+  font-weight: 900;
+}
+.events-panel__content {
+  width: 200%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.events-panel__events-form {
+  display: inline-block;
+  flex-basis: 50%;
+  text-align: center;
+  position: relative;
+}
+.events-panel__add-new-button {
+  appearance: none;
+  padding: 5px 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: none;
+  width: 50%;
+  margin: 10px auto 20px;
+  cursor: pointer;
+  outline: none;
+}
+.events-panel__add-event-form {
+  display: inline-block;
+  padding: 20px 0;
+  flex-basis: 50%;
+  position: relative;
+}
+
+@media (min-width: 975px) {
+  .events-panel {
+    flex-basis: 47%;
+    margin-bottom: 0;
+  }
+}
+.add-event-form-wrapper {
+  width: 75%;
+  margin: 0 auto;
+}
+.add-event-form-wrapper .add-event-form {
+  border: 1px solid #000;
+  border-radius: 3px;
+}
+.add-event-form-wrapper .add-event-form__header {
+  text-align: center;
+  border-bottom: 1px solid #000;
+  margin-bottom: 20px;
+  padding: 5px 0;
+  font-weight: 900;
+}
+.add-event-form-wrapper .add-event-form__form {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin: auto;
+}
+.add-event-form-wrapper .add-event-form__group {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.add-event-form-wrapper .add-event-form__group input {
+  width: 45%;
+  border: 1px solid #555;
+  padding: 3px;
+  border-radius: 3px;
+}
+.add-event-form-wrapper .add-event-form__group label {
+  text-align: right;
+  flex-basis: 45%;
+}
+.add-event-form-wrapper .add-event-form__buttons {
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-around;
+  border-top: 1px solid #000;
+}
+.add-event-form-wrapper .add-event-form__buttons button, .add-event-form-wrapper .add-event-form__buttons input {
+  flex-basis: 25%;
+  appearance: none;
+  padding: 3px 5px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  margin-top: 10px;
+}
+
+.event-items-list {
+  padding: 20px 10px 20px 10px;
+  text-align: left;
+  overflow-y: auto;
+  height: 300px;
+  box-shadow: 0px 0px 5px 1px #444;
+  border-radius: 3px;
+  margin: 20px 5% 10px;
+}
+
+.event-item {
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.event-item.active {
+  background: #ccc;
+}
+.event-item__time {
+  flex-basis: 25%;
+  text-align: center;
+}
+.event-item__text {
+  flex-basis: 60%;
+}
+.event-item__checkbox {
+  pointer-events: none;
+}
+.event-item__delete-button {
+  appearance: none;
+  flex-basis: 5%;
+  border: 1px solid #000;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.time-panel {
+  border: 1px solid #000;
+  border-radius: 3px;
+  width: 100%;
+}
+.time-panel__header {
+  border-bottom: 1px solid #000;
+  padding: 5px;
+  text-align: center;
+  font-weight: 900;
+}
+.time-panel__content {
+  padding: 15px 2.5%;
+}
+.time-panel__options {
+  display: flex;
+  justify-content: center;
+  border: 1px solid #000;
+  border-radius: 3px;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 975px) {
+  .time-panel {
+    flex-basis: 47%;
+  }
+  .time-panel__content {
+    padding: 15px 5%;
+  }
+}
+.time-options {
+  text-align: center;
+  border-right: 1px solid #000;
+  flex-basis: 33%;
+}
+.time-options:last-child {
+  border: none;
+}
+.time-options__title {
+  border-bottom: 1px solid #000;
+  padding: 5px;
+}
+.time-options__time-slider {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+}
+.time-options input {
+  width: 60%;
+}
+
+.time-panel__list ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.time-panel__list-item {
+  border: 1px solid #000;
+  margin: 5px;
+  padding: 3px;
+  text-align: center;
+  flex-basis: 10%;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.time-panel__list-item.active {
+  background: #aaa;
+}
+.time-panel__list-item.disabled {
+  opacity: 0.5;
+  border-color: transparent;
+}
+
+/*# sourceMappingURL=app.css.map */

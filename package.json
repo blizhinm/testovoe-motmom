@@ -1,0 +1,35 @@
+{
+  "name": "testovoe-motmom",
+  "version": "1.0.0",
+  "description": "Testovoe zadanie MOTMOM",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack",
+    "webpackwatch": "webpack --watch",
+    "sass": "sass ./public/src/sass/app.scss ./public/src/css/app.css",
+    "sasswatch": "sass --watch ./public/src/sass/app.scss ./public/src/css/app.css",
+    "nodemon": "nodemon server.js"
+  },
+  "author": "Maxim Blizhin",
+  "license": "ISC",
+  "engines": {
+    "node": "10.15.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "reset-css": "^4.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "handlebars": "^4.1.2",
+    "handlebars-loader": "^1.7.1",
+    "nodemon": "^1.19.0",
+    "sass": "^1.20.1",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1"
+  }
+}

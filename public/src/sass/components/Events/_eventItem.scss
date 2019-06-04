@@ -1,0 +1,41 @@
+.event-item {
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &.active {
+        background: #ccc;
+    }
+
+    &__time {
+        flex-basis: 25%;
+        text-align: center;
+    }
+
+    &__text {
+        flex-basis: 60%;
+    }
+
+    &__checkbox {
+      pointer-events: none;
+    }
+
+    &__delete-button {
+        appearance: none;
+        flex-basis: 5%;
+        border: 1px solid #000;
+        border: none;
+        border-radius: 50%;
+        background: none;
+        cursor: pointer;
+        outline: none;
+        text-transform: uppercase;
+    }
+}

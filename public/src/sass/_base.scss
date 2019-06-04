@@ -1,0 +1,20 @@
+* {
+  font-size: 15px;
+}
+
+.page-wrapper {
+	padding: 20px 5%;
+}
+
+@media (min-width: $breakpoint-tablet) {
+	.page-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+@media (min-width: $breakpoint-mobile) and (max-width: $breakpoint-tablet - 1px) {
+	.page-wrapper {
+		padding: 20px 15%;
+	}
+}
