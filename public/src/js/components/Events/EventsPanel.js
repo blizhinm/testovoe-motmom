@@ -14,19 +14,25 @@ export default class EventsPanel extends EventEmitter {
 
     this.eventItemsList = new EventItemsList();
 
-    this.state = { list: true, inTransision: false, addForm: false };
+    this.state = { list: true, inTransition: false, addForm: false };
 
     this.html = eventsPanelTemplate();
 
     this.render();
 
-    this.$addNewButton = $('.events-panel__add-new-button');
-    this.$eventItemsList = $('.events-panel__events-form');
-    this.$addEventForm = $('.events-panel__add-event-form');
+    // FIXME: Получение дочерних элементов должно быть относительно родителя
+    this.$layout = $('.events-panel');
+    this.$addNewButton = this.$layout.find('.events-panel__add-new-button');
+    this.$eventItemsList = this.$layout.find('.events-panel__events-form');
+    this.$addEventForm = this.$layout.find('.events-panel__add-event-form');
 
     this.initListeners();
 
     API.events.logEvents();
+  }
+
+  isActiveEventsExists() {
+    return !!this.eventItemsList.activeElements.length;
   }
 
   changeStateTo(state) {
@@ -34,12 +40,18 @@ export default class EventsPanel extends EventEmitter {
     this.state.addForm = false;
     this.state[state] = true;
 
-    if (this.state.addForm) {
-      this.startTransition(this.$eventItemsList, this.$addEventForm, this.$addEventForm.offset().left - $('.events-panel').offset().left);
-    } else if (this.state.list) {
-      this.startTransition(this.$eventItemsList, this.$addEventForm, this.$eventItemsList.offset().left - $('.events-panel').offset().left);
-    }
-    this.state.inTransision = true;
+    const animationOffset = (this.state.addForm
+      ? this.$addEventForm.offset().left
+      : this.$eventItemsList.offset().left) - this.$layout.offset().left;
+
+    // FIXME: Вызов одного метода с разными параметрами
+    this.startTransition(
+      this.$eventItemsList,
+      this.$addEventForm,
+      animationOffset,
+    );
+
+    this.state.inTransition = true;
   }
 
   getActiveEvents() {
@@ -59,23 +71,28 @@ export default class EventsPanel extends EventEmitter {
 
   // Change between EventsList and AddEventForm
   startTransition(el1, el2, val) {
-    if (!this.state.inTransision) {
-      $(el2).animate({ left: `-=${val}px` });
-      $(el1).animate({ left: `-=${val}px` }, () => {
-        this.state.inTransision = false;
-      });
+    // FIXME: Избегать вложенности
+    if (this.state.inTransition) {
+      return;
     }
+
+    $(el2).animate({ left: `-=${val}px` });
+    $(el1).animate({ left: `-=${val}px` }, () => {
+      this.state.inTransition = false;
+    });
   }
 
   // Initialize Listeners
   initListeners() {
     // AddEventForm
     this.addEventForm.addListener('newEventSubmit', (event) => {
+      // FIXME: Некорректная работа с асинхронностью
       API.events.addEvent(event).then(() => {
         this.eventItemsList.reRenderItems();
+        this.changeStateTo('list');
       });
-      this.changeStateTo('list');
     });
+
     this.addEventForm.addListener('cancelButtonClick', () => {
       this.changeStateTo('list');
     });
@@ -87,12 +104,14 @@ export default class EventsPanel extends EventEmitter {
         this.emit('eventItemSelected', this.getActiveEvents());
       });
     });
+
     this.eventItemsList.addListener('eventItemSelected', (activeEvents) => {
       this.emit('eventItemSelected', activeEvents);
     });
 
     // EventsPanel buttons
-    $(this.$addNewButton).on('click', () => {
+    // FIXME: Лишнее оборачивание
+    this.$addNewButton.on('click', () => {
       this.changeStateTo('addForm');
     });
   }

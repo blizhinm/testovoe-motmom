@@ -15,6 +15,10 @@ export default class TimePanel extends EventEmitter {
     this.initListeners();
 
     this.html = timePanelTemplate();
+
+    $('.time-panel').html(this.html);
+    this.timeItemsList.render();
+    this.timeOptions.render();
   }
 
   setActiveEvents(selection) {
@@ -44,11 +48,5 @@ export default class TimePanel extends EventEmitter {
     this.timeItemsList.addListener('eventsActiveSelectionRequest', () => {
       this.emit('eventsActiveSelectionRequest');
     });
-  }
-
-  render() {
-    $('.time-panel').html(this.html);
-    this.timeItemsList.render();
-    this.timeOptions.render();
   }
 }

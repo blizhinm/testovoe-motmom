@@ -41,6 +41,7 @@ export default class AddEventForm extends EventEmitter {
 
   validateForm() {
     if (this.$nameInput.val().length && this.$timeInput.val().length) {
+      // FIXME: Вынести в отдельный метод и вызвать его здесь
       if ((/\d{2}:\d{2}/).test(this.$timeInput.val()) && parseInt(this.$timeInput.val().split(':')[0], 10) <= 23
           && parseInt(this.$timeInput.val().split(':')[1], 10) <= 59) {
         return true;
@@ -51,6 +52,7 @@ export default class AddEventForm extends EventEmitter {
     } else if (!this.$timeInput.val()) {
       this.$timeInput.focus();
     }
+
     return false;
   }
 

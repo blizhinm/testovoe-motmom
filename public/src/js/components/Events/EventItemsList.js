@@ -4,6 +4,19 @@ import EventItem from './EventItem';
 
 const eventItemsListTemplate = require('../../templates/eventItemsList.handlebars');
 
+const ASC = 'ascending';
+
+
+/**
+ * Получение даты по переданной строке со временем
+ * @param {'HH:mm'} timeString
+ */
+function getDateByTime(timeString) {
+  const [hours, minutes] = timeString.split(':');
+
+  return new Date(0, 0, 0, hours, minutes);
+}
+
 export default class EventItemsList extends EventEmitter {
   constructor() {
     super();
@@ -16,20 +29,21 @@ export default class EventItemsList extends EventEmitter {
     this.createItems();
   }
 
-  sortItems(t) {
-    const type = { asc: [-1, 1], desc: [1, -1] };
+  sortItems(type) {
+    const SORT_TYPE_VALUE = {
+      [ASC]: [-1, 1],
+      desc: [1, -1],
+    }[type];
 
     this.eventElements.sort((a, b) => {
-      const aTime = { h: a.eventInfo.time.split(':')[0], m: a.eventInfo.time.split(':')[1] };
-      const bTime = { h: b.eventInfo.time.split(':')[0], m: b.eventInfo.time.split(':')[1] };
+      const aDate = getDateByTime(a.eventInfo.time);
+      const bDate = getDateByTime(b.eventInfo.time);
 
-      const aTotal = parseInt(aTime.h, 10) * 60 + parseInt(aTime.m, 10);
-      const bTotal = parseInt(bTime.h, 10) * 60 + parseInt(bTime.m, 10);
-
-      if (aTotal <= bTotal) {
-        return type[t][0];
+      if (aDate <= bDate) {
+        return SORT_TYPE_VALUE[0];
       }
-      return type[t][1];
+
+      return SORT_TYPE_VALUE[1];
     });
   }
 
@@ -62,7 +76,8 @@ export default class EventItemsList extends EventEmitter {
   }
 
   getActiveIndexOf(item) {
-    return this.activeElements.map(el => el.eventInfo.id).indexOf(item.eventInfo.id);
+    return this.activeElements.findIndex(({ eventInfo }) => eventInfo.id === item.eventInfo.id);
+    // return this.activeElements.map(el => el.eventInfo.id).indexOf(item.eventInfo.id);
   }
 
   addActive(item) {
@@ -87,9 +102,9 @@ export default class EventItemsList extends EventEmitter {
   selectItems(time) {
     this.unselectItems();
 
-    this.eventElements.forEach((el) => {
-      if (el.eventInfo.time === time) {
-        this.toggleItemSelection(el);
+    this.eventElements.forEach((event) => {
+      if (event.eventInfo.time === time) {
+        this.toggleItemSelection(event);
       }
     });
   }
@@ -106,7 +121,7 @@ export default class EventItemsList extends EventEmitter {
     }
 
     console.log(this.activeElements);
-
+    // FIXME: Адресация через классы, а не через относительные функции
     const checkVal = $(item.$body.children()[0]).prop('checked');
     $(item.$body.children()[0]).prop('checked', !checkVal);
 
@@ -122,7 +137,7 @@ export default class EventItemsList extends EventEmitter {
   }
 
   renderItems() {
-    this.sortItems('asc');
+    this.sortItems(ASC);
 
     this.eventElements.forEach((el) => {
       el.render();
@@ -130,6 +145,7 @@ export default class EventItemsList extends EventEmitter {
   }
 
   render() {
+    // FIXME: append, prepend jquery http://api.jquery.com/append/
     $('.events-panel__events-form').html(this.html + $('.events-panel__events-form').html());
     this.renderItems();
   }

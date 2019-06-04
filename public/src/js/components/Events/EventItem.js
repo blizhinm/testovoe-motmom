@@ -3,15 +3,17 @@ import EventEmitter from '../../event-emitter';
 const eventItemTemplate = require('../../templates/eventItem.handlebars');
 
 export default class EventItem extends EventEmitter {
-  constructor(event) {
+  constructor(event, $layout) {
     super();
 
     this.eventInfo = event;
 
+    this.$layout = $layout;
     this.selected = false;
 
     this.html = eventItemTemplate({ event, attr: event.time.replace(':', '-') });
 
+    // FIXME: Если есть возможность, то нужно сразу получать элементы дом дерева
     this.$body = undefined;
     this.$checkbox = undefined;
     this.$deleteButton = undefined;
