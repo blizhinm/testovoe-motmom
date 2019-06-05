@@ -2,6 +2,10 @@ import EventEmitter from '../../event-emitter';
 
 const addEventFormTemplate = require('../../templates/addEventForm.handlebars');
 
+function isTimeValid(time) {
+  return ((/\d{2}:\d{2}/).test(time) && parseInt(time.split(':')[0], 10) <= 23
+          && parseInt(time.split(':')[1], 10) <= 59);
+}
 
 export default class AddEventForm extends EventEmitter {
   constructor() {
@@ -9,12 +13,14 @@ export default class AddEventForm extends EventEmitter {
 
     this.html = addEventFormTemplate();
 
-    this.$form = undefined;
+    this.render();
 
-    this.$nameInput = undefined;
-    this.$timeInput = undefined;
+    this.$form = $('.add-event-form__form');
+    this.$nameInput = this.$form.find('#add-event-form__event-name');
+    this.$timeInput = this.$form.find('#add-event-form__event-time');
+    this.$cancelButton = this.$form.find('.add-event-form__cancel');
 
-    this.$cancelButton = undefined;
+    this.initListeners();
   }
 
   initListeners() {
@@ -40,10 +46,10 @@ export default class AddEventForm extends EventEmitter {
   }
 
   validateForm() {
-    if (this.$nameInput.val().length && this.$timeInput.val().length) {
-      // FIXME: Вынести в отдельный метод и вызвать его здесь
-      if ((/\d{2}:\d{2}/).test(this.$timeInput.val()) && parseInt(this.$timeInput.val().split(':')[0], 10) <= 23
-          && parseInt(this.$timeInput.val().split(':')[1], 10) <= 59) {
+    const time = this.$timeInput.val();
+
+    if (this.$nameInput.val() && time) {
+      if (isTimeValid(time)) {
         return true;
       }
       this.$timeInput.focus();
@@ -61,18 +67,7 @@ export default class AddEventForm extends EventEmitter {
     this.$timeInput.val('');
   }
 
-  initControls() {
-    this.$form = $('.add-event-form__form');
-    this.$nameInput = $('#add-event-form__event-name');
-    this.$timeInput = $('#add-event-form__event-time');
-    this.$cancelButton = $('.add-event-form__cancel');
-
-    this.initListeners();
-  }
-
   render() {
     $('.add-event-form-wrapper').html(this.html);
-
-    this.initControls();
   }
 }

@@ -7,7 +7,13 @@ export default class TimeItem extends EventEmitter {
     super();
 
     this.time = time;
-    this.html = timeItemsListTemplate({ time, attr: time.replace(':', '-') });
+
+    this.html = timeItemsListTemplate({
+      time,
+      attr: time.replace(':', '-'),
+    });
+
+    this.$layout = $('.time-panel__list > ul');
     this.$body = null;
   }
 
@@ -18,13 +24,13 @@ export default class TimeItem extends EventEmitter {
   }
 
   initControls() {
-    this.$body = $(`.time-panel__list-item[data-time=${this.time.replace(':', '-')}]`);
+    this.$body = this.$layout.find(`.time-panel__list-item[data-time=${this.time.replace(':', '-')}]`);
 
     this.initListeners();
   }
 
   render() {
-    $('.time-panel__list ul').append(this.html);
+    this.$layout.append(this.html);
 
     this.initControls();
   }

@@ -5,7 +5,7 @@ import EventItem from './EventItem';
 const eventItemsListTemplate = require('../../templates/eventItemsList.handlebars');
 
 const ASC = 'ascending';
-
+const DESC = 'descending';
 
 /**
  * Получение даты по переданной строке со временем
@@ -23,16 +23,20 @@ export default class EventItemsList extends EventEmitter {
 
     this.html = eventItemsListTemplate();
 
+    this.$layout = $('.events-panel__events-form');
+
     this.eventElements = [];
     this.activeElements = [];
 
     this.createItems();
+
+    this.render();
   }
 
   sortItems(type) {
     const SORT_TYPE_VALUE = {
       [ASC]: [-1, 1],
-      desc: [1, -1],
+      [DESC]: [1, -1],
     }[type];
 
     this.eventElements.sort((a, b) => {
@@ -121,7 +125,6 @@ export default class EventItemsList extends EventEmitter {
     }
 
     console.log(this.activeElements);
-    // FIXME: Адресация через классы, а не через относительные функции
     const checkVal = $(item.$body.children()[0]).prop('checked');
     $(item.$body.children()[0]).prop('checked', !checkVal);
 
@@ -145,8 +148,7 @@ export default class EventItemsList extends EventEmitter {
   }
 
   render() {
-    // FIXME: append, prepend jquery http://api.jquery.com/append/
-    $('.events-panel__events-form').html(this.html + $('.events-panel__events-form').html());
+    this.$layout.prepend(this.html);
     this.renderItems();
   }
 }

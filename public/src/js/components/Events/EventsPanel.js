@@ -10,21 +10,19 @@ export default class EventsPanel extends EventEmitter {
   constructor() {
     super();
 
-    this.addEventForm = new AddEventForm();
-
-    this.eventItemsList = new EventItemsList();
-
     this.state = { list: true, inTransition: false, addForm: false };
 
     this.html = eventsPanelTemplate();
 
-    this.render();
+    $('.events-panel').html(this.html); // Render
 
-    // FIXME: Получение дочерних элементов должно быть относительно родителя
     this.$layout = $('.events-panel');
     this.$addNewButton = this.$layout.find('.events-panel__add-new-button');
     this.$eventItemsList = this.$layout.find('.events-panel__events-form');
     this.$addEventForm = this.$layout.find('.events-panel__add-event-form');
+
+    this.addEventForm = new AddEventForm();
+    this.eventItemsList = new EventItemsList();
 
     this.initListeners();
 
@@ -44,7 +42,6 @@ export default class EventsPanel extends EventEmitter {
       ? this.$addEventForm.offset().left
       : this.$eventItemsList.offset().left) - this.$layout.offset().left;
 
-    // FIXME: Вызов одного метода с разными параметрами
     this.startTransition(
       this.$eventItemsList,
       this.$addEventForm,
@@ -71,7 +68,6 @@ export default class EventsPanel extends EventEmitter {
 
   // Change between EventsList and AddEventForm
   startTransition(el1, el2, val) {
-    // FIXME: Избегать вложенности
     if (this.state.inTransition) {
       return;
     }
@@ -86,7 +82,6 @@ export default class EventsPanel extends EventEmitter {
   initListeners() {
     // AddEventForm
     this.addEventForm.addListener('newEventSubmit', (event) => {
-      // FIXME: Некорректная работа с асинхронностью
       API.events.addEvent(event).then(() => {
         this.eventItemsList.reRenderItems();
         this.changeStateTo('list');
@@ -110,17 +105,8 @@ export default class EventsPanel extends EventEmitter {
     });
 
     // EventsPanel buttons
-    // FIXME: Лишнее оборачивание
     this.$addNewButton.on('click', () => {
       this.changeStateTo('addForm');
     });
-  }
-
-  // Render
-  render() {
-    $('.events-panel').html(this.html);
-
-    this.addEventForm.render();
-    this.eventItemsList.render();
   }
 }

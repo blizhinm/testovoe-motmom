@@ -7,14 +7,16 @@ export default class TimeItemsList extends EventEmitter {
     super();
 
     this.html = '<ul></ul>';
+    this.$layout = $('.time-panel__list');
 
     this.timeItemElements = [];
     this.activeItem = null;
 
+    // Render
+    this.$layout.append(this.html);
+
     this.generateTime(timeData);
-
-
-    this.activeSelection = [];
+    this.renderItems();
   }
 
   generateTime(timeData) {
@@ -31,9 +33,9 @@ export default class TimeItemsList extends EventEmitter {
 
       let hours = Math.floor(time / 60);
 
-      hours = hours >= 10 ? hours : `0${hours}`;
+      hours = hours > 9 ? hours : `0${hours}`;
 
-      const minutes = time % 60 >= 10 ? time % 60 : `0${time % 60}`;
+      const minutes = time % 60 > 9 ? time % 60 : `0${time % 60}`;
 
       const fullTime = `${hours}:${minutes}`;
 
@@ -50,7 +52,7 @@ export default class TimeItemsList extends EventEmitter {
 
   reRenderItems(timeData) {
     this.timeItemElements = [];
-    $('.time-panel__list ul').html('');
+    this.$layout.html(this.html);
 
     this.generateTime(timeData);
 
@@ -65,7 +67,7 @@ export default class TimeItemsList extends EventEmitter {
     this.unselectItems();
 
     if (highlight) {
-      const timeEl = this.timeItemElements[this.timeItemElements.map(el => el.time).indexOf(time)];
+      const timeEl = this.timeItemElements[this.timeItemElements.findIndex(el => el.time === time)];
       if (timeEl) {
         this.selectItem(timeEl);
       }
@@ -95,16 +97,12 @@ export default class TimeItemsList extends EventEmitter {
   }
 
   renderItems() {
-    this.timeItemElements.forEach((time) => {
-      time.render();
-      if (this.activeItem && this.activeItem.time === time.time) {
-        this.selectItem(time);
+    this.timeItemElements.forEach((timeEl) => {
+      timeEl.render();
+
+      if (this.activeItem && this.activeItem.time === timeEl.time) {
+        this.selectItem(timeEl);
       }
     });
-  }
-
-  render() {
-    $('.time-panel__list').append(this.html);
-    this.renderItems();
   }
 }

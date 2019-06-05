@@ -9,20 +9,15 @@ export default class TimePanel extends EventEmitter {
   constructor() {
     super();
 
+    this.html = timePanelTemplate();
+
+    // Render
+    $('.time-panel').html(this.html);
+
     this.timeOptions = new TimeOptions();
     this.timeItemsList = new TimeItemsList(this.timeOptions.timeVariables);
 
     this.initListeners();
-
-    this.html = timePanelTemplate();
-
-    $('.time-panel').html(this.html);
-    this.timeItemsList.render();
-    this.timeOptions.render();
-  }
-
-  setActiveEvents(selection) {
-    this.timeItemsList.activeSelection = selection;
   }
 
   timeHighlight(highlightInfo) {
@@ -34,19 +29,8 @@ export default class TimePanel extends EventEmitter {
       this.timeItemsList.reRenderItems(data);
     });
 
-    // ////////////
     this.timeItemsList.addListener('timeSelected', (time) => {
       this.emit('timeSelected', time);
-    }); // ///////////
-
-    this.timeItemsList.addListener('eventsTimeChange', (time) => {
-      this.emit('eventsTimeChange', time);
-    });
-    this.timeItemsList.addListener('eventsSelectionRequest', (time) => {
-      this.emit('eventsSelectionRequest', time);
-    });
-    this.timeItemsList.addListener('eventsActiveSelectionRequest', () => {
-      this.emit('eventsActiveSelectionRequest');
     });
   }
 }
